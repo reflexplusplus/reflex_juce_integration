@@ -1,0 +1,7 @@
+#
+# Copy this file to `LocalPaths.cmake` and adjust the paths for your machine.
+# `LocalPaths.cmake` is ignored by git so local paths do not end up in commits.
+#
+
+set(JUCE_DIR "D:/path/to/JUCE" CACHE PATH "Path to the JUCE source tree" FORCE)
+set(REFLEX_DIR "D:/path/to/reflex" CACHE PATH "Path to the Reflex source tree" FORCE)

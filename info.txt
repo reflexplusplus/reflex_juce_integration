@@ -1,0 +1,13 @@
+This example shows the basic pieces needed to host a Reflex view inside a JUCE application window.
+
+`Main.cpp` handles application startup. It initialises the Reflex runtime and, for simplicity, uses `Bootstrap::Global` to set up the shared bootstrap state. That takes care of most of the hot-reloading support machinery, including the virtual filesystem, resource pool, and related bootstrap services.
+
+`MainComponent.cpp` is where the JUCE and Reflex integration happens. The component creates a native Reflex window, embeds it into the JUCE-managed native window, and keeps the embedded Reflex window sized to match the JUCE component.
+
+`reflex_view_demo.cpp` is the place to implement your Reflex-based UI. In this example it creates a simple Reflex view, but in a real project this is where you would build out your application's GLX object tree, styling, and interaction logic.
+
+The build is configured against `ReflexTargetLibrary`, which is the Reflex target intended for applications that already provide their own entry point. In this case JUCE owns the application startup, so Reflex is linked in as a library rather than using a Reflex-owned app target.
+
+The project also defines `REFLEX_BOOTSTRAP_TYPE_APP`. The Bootstrap layer uses that macro when deciding whether to enable application-level UI features such as the IDE panel and hot-reloading support.
+
+The project is set up as a minimal proof of concept, so the integration points are easy to see and adapt for a larger application.

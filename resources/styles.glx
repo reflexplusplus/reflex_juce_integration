@@ -1,0 +1,58 @@
+@Font Code:
+{
+    path: ":res:IDE/mono";
+    size: 14;
+};
+
+render: x4;
+
+bg_colour: 255;
+
+bg: 
+Group
+(
+    indent: 8;
+    
+    content:
+    Clip
+    (
+        content:
+        Tile
+        (
+            stride: 128;
+            content:
+            Line(position: top; pattern: dashed; color: 160),
+            Line(position: left; pattern: dashed; color: 160);
+        ),
+        InnerShadow(width: 5; color: 0,32),
+        Border(color: 160);
+    );
+);
+
+TextArea:
+{
+    margin: 16;
+    size: 256;
+    
+    bg: Fill(colour: 216; corner: 8);
+  
+    content:
+    {
+		transition: 0.125;
+		
+		bg: 
+    	Text(indent: 8,12; font: Code; justify: top_left; color: 128; value: "Enter text...");
+
+	    @State used:
+	    {
+            bg: 
+            Text(indent: 8,12; font: Code; justify: top_left; color: 64; value: &value);
+	    };
+
+	    @State active:
+	    {
+            bg: 
+            TextEdit(indent: 8,12; font: Code; justify: top_left; color: 0; value: &value);
+	    };
+	};
+};
