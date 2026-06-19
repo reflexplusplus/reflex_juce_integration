@@ -20,7 +20,7 @@ void MainComponent::parentHierarchyChanged()
 		if (auto system_window = peer->getNativeHandle())
 		{
 			//start GLX, create System::Window, embed into juce managed window, attach view
-			//as we instantiated Bootstrap::Global in GuiAppApplication, we can use Detail::CreateWindowClient which also instantiates the IDE window and hot-reloading
+			//as we instantiated Bootstrap::Global in GuiAppApplication, we can use Detail::CreateAppWindow which also instantiates the IDE window and hot-reloading
 
 			m_reflex_window = System::Window::Create(0, false, system_window);
 
@@ -34,7 +34,9 @@ void MainComponent::parentHierarchyChanged()
 
 			auto view = CreateReflexView(*this);
 
-			m_reflex_window_client = Bootstrap::Detail::CreateWindowClient(m_reflex_window, view, File::PersistentPropertySet::null);	//the Bootstrap window client will try to store/restore its size from the propertyset, but as we are embedded, we dont need it anyway, so pass the null instance
+			m_reflex_window_client = Bootstrap::Detail::CreateAppWindow(m_reflex_window, view);
+
+			m_reflex_window_client->SetDisplayMode(System::kWindowDisplayWindowed);
 
 			resized();	// juce can recreate the peer without sending resized()
 
